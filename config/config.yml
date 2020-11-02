@@ -1,0 +1,6 @@
+server:
+  host: "localhost"
+  port: "500051"
+
+worker:
+  retry_interval: 5s

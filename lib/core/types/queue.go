@@ -3,25 +3,25 @@ package types
 import "sync"
 
 type Queue struct {
-	tasks    chan string
+	Tasks    chan string
 	shutdown chan struct{}
 	mu       sync.Mutex
 }
 
 func NewQueue() *Queue {
 	return &Queue{
-		tasks:    make(chan string, 100),
+		Tasks:    make(chan string, 100),
 		shutdown: make(chan struct{}),
 	}
 }
 
 func (q *Queue) Enqueue(task string) {
-	q.tasks <- task
+	q.Tasks <- task
 }
 
 func (q *Queue) Dequeue() (string, bool) {
 	select {
-	case task := <-q.tasks:
+	case task := <-q.Tasks:
 		return task, true
 	case <-q.shutdown:
 		return "", false
@@ -30,5 +30,5 @@ func (q *Queue) Dequeue() (string, bool) {
 
 func (q *Queue) Shutdown() {
 	close(q.shutdown)
-	close(q.tasks)
+	close(q.Tasks)
 }
