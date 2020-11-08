@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package taskqueue;
+
+option go_package = "./proto";
+
+service TaskQueue {
+  rpc Enqueue(TaskRequest) returns (TaskResponse);
+  rpc Dequeue(Empty) returns (TaskResponse);
+}
+
+message Task {
+  string id = 1;
+  string name = 2;
+  string payload = 3;
+}
+
+message TaskRequest {
+  string name = 1;
+  string payload = 2;
+}
+
+message TaskResponse {
+  bool success = 1;
+}
+
+message Empty {}
