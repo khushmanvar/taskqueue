@@ -1,4 +1,4 @@
-.PHONY: proto server worker
+.PHONY: proto server worker benchmark
 
 proto:
 	sh scripts/generate_proto.sh
@@ -8,3 +8,6 @@ server:
 
 worker:
 	go run cmd/worker/main.go
+
+benchmark:
+	go test -bench=./benchmarks

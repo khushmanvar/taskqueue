@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"sync"
 	"taskqueue/lib/core/types"
-	"taskqueue/lib/core/worker"
 )
 
 func main() {
@@ -14,7 +13,7 @@ func main() {
 	// Start workers
 	for i := 0; i < 1000; i++ {
 		wg.Add(1)
-		go worker.Worker(queue, wg)
+		go types.Worker(queue, wg)
 	}
 
 	// Push tasks

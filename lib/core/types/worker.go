@@ -1,13 +1,12 @@
-package worker
+package types
 
 import (
 	"log"
 	"sync"
-	"taskqueue/lib/core/types"
 	"time"
 )
 
-func Worker(queue *types.Queue, wg *sync.WaitGroup) {
+func Worker(queue *Queue, wg *sync.WaitGroup) {
 	defer wg.Done()
 
 	for {
